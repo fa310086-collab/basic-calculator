@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://127.0.0.1:5500/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>kalkulator</title>
+ <link rel="stylesheet" href="./kalkulator_files/style.css">
+ </head>
+ <body>
+
+<div class="kalkulator">
+
+<button onclick="toggleMenu()">MODE</button>
+
+<input type="text" id="layar" disabled="">
+
+<div class="container" style="justify-content: center;">
+
+<div class="kiri hide" id="menukiri">
+    <button onclick="hitungTrig(&#39;sin&#39;)">sin</button>
+    <button onclick="hitungTrig(&#39;cos&#39;)">cos</button>
+    
+    <button onclick="hitungTrig(&#39;tan&#39;)">tan</button>
+    <button onclick="hitungTrig(&#39;log&#39;)">log</button>
+</div>
+
+<div class="kanan">
+<button onclick="tambah(&#39;7&#39;)">7</button>
+<button onclick="tambah(&#39;8&#39;)">8</button>
+<button onclick="tambah(&#39;9&#39;)">9</button>
+<button onclick="tambah(&#39;/&#39;)">/</button>
+
+<button onclick="tambah(&#39;4&#39;)">4</button>
+<button onclick="tambah(&#39;5&#39;)">5</button>
+<button onclick="tambah(&#39;6&#39;)">6</button>
+<button onclick="tambah(&#39;*&#39;)">*</button>
+
+<button onclick="tambah(&#39;1&#39;)">1</button>
+<button onclick="tambah(&#39;2&#39;)">2</button>
+<button onclick="tambah(&#39;3&#39;)">3</button>
+<button onclick="tambah(&#39;_&#39;)">_</button>
+
+<button onclick="tambah(&#39;0&#39;)">0</button>
+<button onclick="tambah(&#39;+&#39;)">+</button>
+<button onclick="hitung()">=</button>
+<button onclick="clearlayar()">c</button>
+
+</div>
+
+<script>
+
+let layar = document.getElementById("layar")
+
+function tambah(val){
+    layar.value += val;
+}
+
+function hitung(){
+    layar.value = eval(layar.value);
+}
+
+function clearlayar(){
+    layar.value = "";
+}
+
+function hitungTrig(type){
+  let value = parseFloat(layar.value);
+
+  if (isNaN(value)) return;
+
+  let rad = value * (Math.PI / 180);
+
+  if(type === "sin"){
+    layar.value = Math.sin(rad);
+  } 
+  else if(type === "cos"){
+    layar.value = Math.cos(rad);
+  } 
+  else if(type === "tan"){
+    layar.value = Math.tan(rad);
+  }
+  else if(type === "log"){
+    layar.value = Math.log10(value); // log basis 10
+  }
+}
+
+function toggleMenu() {
+  let kiri = document.getElementById("menukiri");
+  let container = document.querySelector(".container");
+
+  kiri.classList.toggle("hide");
+
+  if (kiri.classList.contains("hide")) {
+    container.style.justifyContent = "center";
+  } else {
+    container.style.justifyContent = "space-between";
+  }
+}
+</script>
+
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</div></div></body></html>
