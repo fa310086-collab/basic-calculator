@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>kalkulator</title>
+ <link rel="stylesheet"href="style.css">
+ </head>
+ <body>
+
+<div class="kalkulator">
+
+<button onclick="toggleMenu()">MODE</button>
+
+<input type="text" id="layar" disabled>
+
+<div class="container">
+
+<div class="kiri" id="menukiri">
+    <button onclick="hitungTrig('sin')">sin</button>
+    <button onclick="hitungTrig('cos')">cos</button>
+    
+    <button onclick="hitungTrig('tan')">tan</button>
+    <button onclick="hitungTrig('log')">log</button>
+</div>
+
+<div class="kanan">
+<button onclick="tambah('7')">7</button>
+<button onclick="tambah('8')">8</button>
+<button onclick="tambah('9')">9</button>
+<button onclick="tambah('/')">/</button>
+
+<button onclick="tambah('4')">4</button>
+<button onclick="tambah('5')">5</button>
+<button onclick="tambah('6')">6</button>
+<button onclick="tambah('*')">*</button>
+
+<button onclick="tambah('1')">1</button>
+<button onclick="tambah('2')">2</button>
+<button onclick="tambah('3')">3</button>
+<button onclick="tambah('_')">_</button>
+
+<button onclick="tambah('0')">0</button>
+<button onclick="tambah('+')">+</button>
+<button onclick="hitung()">=</button>
+<button onclick="clearlayar()">c</button>
+
+</div>
+
+<script>
+
+let layar = document.getElementById("layar")
+
+function tambah(val){
+    layar.value += val;
+}
+
+function hitung(){
+    layar.value = eval(layar.value);
+}
+
+function clearlayar(){
+    layar.value = "";
+}
+
+function hitungTrig(type){
+  let value = parseFloat(layar.value);
+
+  if (isNaN(value)) return;
+
+  let rad = value * (Math.PI / 180);
+
+  if(type === "sin"){
+    layar.value = Math.sin(rad);
+  } 
+  else if(type === "cos"){
+    layar.value = Math.cos(rad);
+  } 
+  else if(type === "tan"){
+    layar.value = Math.tan(rad);
+  }
+  else if(type === "log"){
+    layar.value = Math.log10(value); // log basis 10
+  }
+}
+
+function toggleMenu() {
+  let kiri = document.getElementById("menukiri");
+  let container = document.querySelector(".container");
+
+  kiri.classList.toggle("hide");
+
+  if (kiri.classList.contains("hide")) {
+    container.style.justifyContent = "center";
+  } else {
+    container.style.justifyContent = "space-between";
+  }
+}
+</script>
+
+</body>
